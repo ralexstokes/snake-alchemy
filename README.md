@@ -10,7 +10,7 @@ Using [leiningen](https://leiningen.org/):
 
 `lein run $FILENAME`
 
-where `$FILENAME` is the name of the file; this file must be on the classpath.
+where `$FILENAME` is the name of the file to convert; this file must be on the classpath.
 
 ## License
 
