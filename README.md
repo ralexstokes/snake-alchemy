@@ -10,8 +10,8 @@ Using [leiningen](https://leiningen.org/):
 
 `lein run $FILENAME`
 
-where `$FILENAME` is on the name of the file; this file must be in the classpath.
+where `$FILENAME` is the name of the file; this file must be on the classpath.
 
 ## License
 
-See `LICENSE.md`.
+See `LICENSE`.
