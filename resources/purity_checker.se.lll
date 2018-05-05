@@ -1,0 +1,215 @@
+(return 0 
+    (lll 
+        (with '__funid 
+            (div (calldataload 0) 
+                26959946667150639794667015087019630673637144422540572481103610249216
+            )
+            (seq
+                (set 'mask 
+                    57897811465722876096115075801844696845150819816717216876035649536196444422144
+                )
+                (unless (iszero (eq (get '__funid) 2710585003)) 
+                    (seq 
+                        (with '_inputdata (alloc (calldatasize)) 
+                            (seq 
+                                (calldatacopy (get '_inputdata) 4 (calldatasize))
+                                (set 'addr (calldataload 4))
+                            )
+                        )
+                        (seq 
+                            (set 'extcode 
+                                (with '_temp_1098l (extcodesize (get 'addr)) 
+                                    (with '_temp_1098x (alloc (add 32 (get '_temp_1098l))) 
+                                        (seq 
+                                            (mstore (get '_temp_1098x) (get '_temp_1098l))
+                                            (add (get '_temp_1098x) 32)
+                                        )
+                                    )
+                                )
+                            )
+                            (extcodecopy (get 'addr) (get 'extcode) 0 (extcodesize (get 'addr)))
+                            (set 'ops 
+                                (with '_temp_1121l (extcodesize (get 'addr)) 
+                                    (with '_temp_1121x (alloc (add 32 (mul 32 (get '_temp_1121l)))) 
+                                        (seq 
+                                            (mstore (get '_temp_1121x) (get '_temp_1121l))
+                                            (add (get '_temp_1121x) 32)
+                                        )
+                                    )
+                                )
+                            )
+                            (set 'pushargs 
+                                (with '_temp_1140l (extcodesize (get 'addr)) 
+                                    (with '_temp_1140x (alloc (add 32 (mul 32 (get '_temp_1140l)))) 
+                                        (seq 
+                                            (mstore (get '_temp_1140x) (get '_temp_1140l))
+                                            (add (get '_temp_1140x) 32)
+                                        )
+                                    )
+                                )
+                            )
+                            (with 'i 0 
+                                (with 'op 0 
+                                    (until (iszero (slt (get 'i) (mload (sub (get 'extcode) 32)))) 
+                                        (with 'c (mod (mload (sub (add (get 'extcode) (get 'i)) 31)) 256) 
+                                            (seq 
+                                                (unless (iszero (and (exp 2 (get 'c)) (get 'mask))) (invalid))
+                                                (if (if (iszero (sgt 96 (get 'c))) (iszero (sgt (get 'c) 127)) 0) 
+                                                    (seq 
+                                                        (mstore (add (get 'pushargs) (mul 32 (get 'op))) 
+                                                            (div (mload (add (add (get 'extcode) (get 'i)) 1)) (exp 256 (sub 127 (get 'c))))
+                                                        )
+                                                        (set 'i (add (get 'i) (sub (get 'c) 94)))
+                                                    )
+                                                    (if 
+                                                        (with '_temp_12361 
+                                                            (with '_temp_12381 (eq (get 'c) 241) 
+                                                                (if (get '_temp_12381) (get '_temp_12381) (eq (get 'c) 242))
+                                                            )
+                                                            (if (get '_temp_12361) (get '_temp_12361) (eq (get 'c) 244))
+                                                        )
+                                                        (seq 
+                                                            (if 
+                                                                (if 
+                                                                    (if (iszero (slt (get 'op) 2)) 
+                                                                        (iszero (slt (mload (add (get 'ops) (mul 32 (sub (get 'op) 1)))) 96))
+                                                                        0
+                                                                    )
+                                                                    (iszero (sgt (mload (add (get 'ops) (mul 32 (sub (get 'op) 1)))) 127))
+                                                                    0
+                                                                )
+                                                                (set 'address_entry (sub (get 'op) 2))
+                                                                (if 
+                                                                    (if 
+                                                                        (if 
+                                                                            (if 
+                                                                                (if (iszero (slt (get 'op) 4)) 
+                                                                                    (eq (mload (add (get 'ops) (mul 32 (sub (get 'op) 1)))) 3)
+                                                                                    0
+                                                                                )
+                                                                                (eq (mload (add (get 'ops) (mul 32 (sub (get 'op) 2)))) 90)
+                                                                                0
+                                                                            )
+                                                                            (iszero (slt (mload (add (get 'ops) (mul 32 (sub (get 'op) 3)))) 96))
+                                                                            0
+                                                                        )
+                                                                        (iszero (sgt (mload (add (get 'ops) (mul 32 (sub (get 'op) 3)))) 127))
+                                                                        0
+                                                                    )
+                                                                    (set 'address_entry (sub (get 'op) 4))
+                                                                    (if 
+                                                                        (if (iszero (slt (get 'op) 2)) 
+                                                                            (eq (mload (add (get 'ops) (mul 32 (sub (get 'op) 1)))) 90)
+                                                                            0
+                                                                        )
+                                                                        (set 'address_entry (sub (get 'op) 2))
+                                                                        (if 
+                                                                            (if (iszero (slt (get 'op) 2)) 
+                                                                                (eq (mload (add (get 'ops) (mul 32 (sub (get 'op) 1)))) 144)
+                                                                                0
+                                                                            )
+                                                                            (set 'address_entry (sub (get 'op) 2))
+                                                                            (if 
+                                                                                (if 
+                                                                                    (if (iszero (slt (get 'op) 2)) 
+                                                                                        (iszero (slt (mload (add (get 'ops) (mul 32 (sub (get 'op) 1)))) 128))
+                                                                                        0
+                                                                                    )
+                                                                                    (slt (mload (add (get 'ops) (mul 32 (sub (get 'op) 1)))) 144)
+                                                                                    0
+                                                                                )
+                                                                                (set 'address_entry (sub (get 'op) 2))
+                                                                                (invalid)
+                                                                            )
+                                                                        )
+                                                                    )
+                                                                )
+                                                            )
+                                                            (if 
+                                                                (sload 
+                                                                    (sha3 
+                                                                        (with '_temp_1461pos (alloc 64) 
+                                                                            (seq 
+                                                                                (mstore (get '_temp_1461pos) 0)
+                                                                                (mstore (add 32 (get '_temp_1461pos)) 
+                                                                                    (mload (add (get 'pushargs) (mul 32 (get 'address_entry))))
+                                                                                )
+                                                                                (get '_temp_1461pos)
+                                                                            )
+                                                                        )
+                                                                        64
+                                                                    )
+                                                                )
+                                                                (set 'success 1)
+                                                                (if (eq (mload (add (get 'ops) (mul 32 (get 'address_entry)))) 48) 
+                                                                    (set 'success 1)
+                                                                    (unless (iszero (eq (mload (add (get 'ops) (mul 32 (get 'address_entry)))) 96)) 
+                                                                        (set 'success 1)
+                                                                    )
+                                                                )
+                                                            )
+                                                            (unless (iszero (iszero (get 'success))) (invalid))
+                                                            (set 'i (add (get 'i) 1))
+                                                        )
+                                                        (set 'i (add (get 'i) 1))
+                                                    )
+                                                )
+                                                (mstore (add (get 'ops) (mul 32 (get 'op))) (get 'c))
+                                                (set 'op (add (get 'op) 1))
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                            (sstore 
+                                (sha3 
+                                    (with '_temp_1542pos (alloc 64) 
+                                        (seq 
+                                            (mstore (get '_temp_1542pos) 0)
+                                            (mstore (add 32 (get '_temp_1542pos)) (get 'addr))
+                                            (get '_temp_1542pos)
+                                        )
+                                    )
+                                    64
+                                )
+                                1
+                            )
+                            (seq 
+                                (set '_temp_15631 1)
+                                (return (ref '_temp_15631) 32)
+                            )
+                        )
+                    )
+                )
+                (unless (iszero (eq (get '__funid) 3258357672)) 
+                    (seq 
+                        (with '_inputdata (alloc (calldatasize)) 
+                            (seq 
+                                (calldatacopy (get '_inputdata) 4 (calldatasize))
+                                (set 'addr (calldataload 4))
+                            )
+                        )
+                        (seq 
+                            (set '_temp_15901 
+                                (sload 
+                                    (sha3 
+                                        (with '_temp_1595pos (alloc 64) 
+                                            (seq 
+                                                (mstore (get '_temp_1595pos) 0)
+                                                (mstore (add 32 (get '_temp_1595pos)) (get 'addr))
+                                                (get '_temp_1595pos)
+                                            )
+                                        )
+                                        64
+                                    )
+                                )
+                            )
+                            (return (ref '_temp_15901) 32)
+                        )
+                    )
+                )
+            )
+        )
+        0
+    )
+)

@@ -1,0 +1,22 @@
+(return 0 
+    (lll 
+        (with '__funid 
+            (div (calldataload 0) 
+                26959946667150639794667015087019630673637144422540572481103610249216
+            )
+            (seq
+                (unless (iszero (eq (get '__funid) 3258357672)) 
+                    (seq 
+                        (with '_inputdata (alloc (calldatasize)) 
+                            (seq 
+                                (calldatacopy (get '_inputdata) 4 (calldatasize))
+                                (set 'addr (calldataload 4))
+                            )
+                        )
+                    )
+                )
+            )
+        )
+        0
+    )
+)

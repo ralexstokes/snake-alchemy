@@ -1,36 +1,17 @@
 # snake-alchemy
 
-FIXME: description
+This tool converts valid [Serpent LLL](https://github.com/ethereum/serpent) into valid [Vyper LLL](https://github.com/ethereum/vyper).
 
-## Installation
-
-Download from http://example.com/FIXME.
+Conversion is not total, in the sense that there could be valid Serpent expressions that this tool does not recognize as needing to convert for Vyper. If you find anything, please open an issue.
 
 ## Usage
 
-FIXME: explanation
+Using `leiningen`:
 
-    $ java -jar snake-alchemy-0.1.0-standalone.jar [args]
+`lein run $FILENAME`
 
-## Options
-
-FIXME: listing of options this app accepts.
-
-## Examples
-
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
+where `$FILENAME` is on the name of the file; this file must be in the classpath.
 
 ## License
 
-Copyright © 2018 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+See `LICENSE.md`.
