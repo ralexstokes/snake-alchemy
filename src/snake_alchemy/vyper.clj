@@ -1,34 +1,31 @@
 (ns snake-alchemy.vyper
   (:require [snake-alchemy.serpent :as serpent]))
 
-(deftype Application [operator operands])
+(defn mk-not-if [p c]
+  (serpent/->Application
+   (serpent/->Literal 'if)
+   (list (serpent/->Application
+          (serpent/->Literal 'not)
+          (list p))
+         c)))
 
-(defmethod print-method Application [node ^java.io.Writer w]
-  (let [op (.operator node)
-        args (.operands node)]
-    (.write w (apply str "(" op " " args ")"))))
-
-(deftype Literal [value])
-
-(defmethod print-method Literal [node ^java.io.Writer w]
-  (let [value (.value node)]
-    (.write w (str value))))
+(defn parse-serpent-unless [ast]
+  (let [p (.predicate ast)
+        c (.consequent ast)]
+    (mk-not-if p c)))
 
 (declare from-serpent)
-
-(defn parse-serpent-literal [ast]
-  (->Literal (.value ast)))
 
 (defn parse-serpent-application [ast]
   (let [operator (.operator ast)
         operands (.operands ast)]
-    (->Application operator
-                   (mapcat from-serpent-without-quotes operands))))
+    (serpent/->Application operator (map from-serpent operands))))
 
 (defn from-serpent
   "takes a value produced by `snake-alchemy.serpent/parse`; implies that serpent AST types are valid vyper AST types unless they are converted here"
   [ast]
   (cond
+    (instance? snake_alchemy.serpent.Literal ast) ast
     (instance? snake_alchemy.serpent.Unless ast) (parse-serpent-unless ast)
     (instance? snake_alchemy.serpent.Application ast) (parse-serpent-application ast)
     :else ast))

@@ -2,14 +2,16 @@
   (:gen-class)
   (:require [snake-alchemy.vyper :as vyper]
             [clojure.java.io :as io]
-            [clojure.pprint :as pp]))
+            [clojure.pprint :as pp]
+            [snake-alchemy.serpent :as serpent]))
 
-(def load (comp read-string slurp io/resource))
+(def load-from-name (comp read-string slurp io/resource))
 
 (defn -main
   "I don't do a whole lot ... yet."
   [& args]
   (-> (first args)
-      load
+      load-from-name
+      serpent/parse
       vyper/from-serpent
       pp/pprint))

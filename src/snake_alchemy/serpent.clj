@@ -1,27 +1,38 @@
 (ns snake-alchemy.serpent
   (:require [clojure.java.io :as io]))
 
-(deftype Application [operator operands])
+(defrecord Application [operator operands])
 
 (defmethod print-method Application [node ^java.io.Writer w]
   (let [op (.operator node)
         args (.operands node)]
-    (.write w (apply str "(" op " " (pr-str args) ")"))))
+    (.write w (apply str "(" (pr-str op) " " (pr-str args) ")"))))
 
-(deftype Literal [value])
+(defrecord Literal [value])
 
 (defmethod print-method Literal [node ^java.io.Writer w]
   (let [value (.value node)]
-    (.write w (str value))))
+    (.write w (pr-str value))))
 
-(deftype Unless [predicate consequent])
+(defrecord Unless [predicate consequent])
 
 (defmethod print-method Unless [node ^java.io.Writer w]
   (let [p (.predicate node)
         c (.consequent node)]
     (.write w (apply str "(unless " (pr-str p) (pr-str c) ")"))))
 
+(defrecord Set [key value])
+
+(defmethod print-method Set [node ^java.io.Writer w]
+  (let [k (.key node)
+        v (.value node)]
+    (.write w (apply str "(set " (pr-str k) (pr-str v) ")"))))
+
 (declare parse)
+
+(defn matches-literal? [symbol ast]
+  (and (instance? snake_alchemy.serpent.Literal ast)
+       (= symbol (.value ast))))
 
 (defn parse-symbol [code]
   (->Literal code))
@@ -32,7 +43,7 @@
 (defn normalize-application [ast]
   (let [op (.operator ast)
         args (.operands ast)]
-    (if (= op 'quote)
+    (if (matches-literal? 'quote op)
       (first args)
       ast)))
 
@@ -42,12 +53,10 @@
     :else ast))
 
 (defn parse-application [code]
-  (let [operator (first code)
-        operands (map parse (rest code))
-        normalized (map normalize operands)]
+  (let [[operator & operands] (map (comp normalize parse) code)]
     (cond
-      (= operator 'unless) (->Unless (first normalized) (rest normalized))
-      :else (->Application operator normalized))))
+      (matches-literal? 'unless operator) (->Unless (first operands) (second operands))
+      :else (->Application operator operands))))
 
 (defn parse
   "assumes the Clojure reader has `read` a string containing valid Serpent LLL"
