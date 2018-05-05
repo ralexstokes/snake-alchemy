@@ -6,7 +6,7 @@ Conversion is not total, in the sense that there could be valid Serpent expressi
 
 ## Usage
 
-Using `leiningen`:
+Using [leiningen](https://leiningen.org/):
 
 `lein run $FILENAME`
 
