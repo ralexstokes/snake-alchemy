@@ -12,6 +12,12 @@ Using [leiningen](https://leiningen.org/):
 
 where `$FILENAME` is the name of the file to convert; this file must be on the classpath.
 
+For example,
+
+`lein run purity_checker.se.lll`
+
+will convert the Serpent LLL in `purity_checker.se.lll` to Vyper LLL and pretty print this code to STDOUT.
+
 ## License
 
 See `LICENSE`.
