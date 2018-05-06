@@ -1,0 +1,1 @@
+(return 0 (lll (set 'addr (calldataload 4))) 0)

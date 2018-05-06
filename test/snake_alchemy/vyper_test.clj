@@ -19,5 +19,14 @@
                                                (list (serpent/->Application
                                                       (serpent/->Literal 'iszero)
                                                       (list (serpent/->Literal 5)))))
-                        (serpent/->Application (serpent/->Literal 'seq) nil)))]
+                        (serpent/->Application (serpent/->Literal 'seq) '())))]
+      (is (= target result)))))
+
+(deftest remove-get
+  (testing "(get v) ~> v"
+    (let [src "(get 'foo)"
+          code (read-string src)
+          ast (serpent/parse code)
+          result (vyper/from-serpent ast)
+          target (serpent/->Literal 'foo)]
       (is (= target result)))))

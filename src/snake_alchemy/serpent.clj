@@ -21,12 +21,17 @@
         c (.consequent node)]
     (.write w (apply str "(unless " (pr-str p) (pr-str c) ")"))))
 
-(defrecord Set [key value])
+(defrecord Get [value])
 
-(defmethod print-method Set [node ^java.io.Writer w]
-  (let [k (.key node)
-        v (.value node)]
-    (.write w (apply str "(set " (pr-str k) (pr-str v) ")"))))
+(defmethod print-method Get [node ^java.io.Writer w]
+  (let [v (.value node)]
+    (.write w (apply str "(get " (pr-str v) ")"))))
+
+(defrecord Alloc [expr])
+
+(defmethod print-method Alloc [node ^java.io.Writer w]
+  (let [e (.expr node)]
+    (.write w (apply str "(alloc" (pr-str e) ")"))))
 
 (declare parse)
 
@@ -56,6 +61,8 @@
   (let [[operator & operands] (map (comp normalize parse) code)]
     (cond
       (matches-literal? 'unless operator) (->Unless (first operands) (second operands))
+      (matches-literal? 'get operator) (->Get (first operands))
+      (matches-literal? 'alloc operator) (->Alloc (first operands))
       :else (->Application operator operands))))
 
 (defn parse

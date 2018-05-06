@@ -14,4 +14,5 @@
       load-from-name
       serpent/parse
       vyper/from-serpent
-      pp/pprint))
+      vyper/pretty-print->python
+      println))
